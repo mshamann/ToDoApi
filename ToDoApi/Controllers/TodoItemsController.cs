@@ -45,14 +45,14 @@ namespace ToDoApi.Controllers
       using var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
       connection.Open();
 
-      if (connection.QueryFirstOrDefault<int?>(@"SELECT id 
+      if (connection.QueryFirstOrDefault<int?>(@"SELECT ToDoItemId
                                                 FROM todoitem i 
-                                                WHERE name = @name", new { Name = "Clean Basement" }) == null)
+                                                WHERE ToDoItemName = @ToDoItemName", new { ToDoItemName = "Clean Basement" }) == null)
       {
-        connection.Execute(@"INSERT TodoItem (Name) VALUES (@Name)",
+        connection.Execute(@"INSERT TodoItem (ToDoItemName) VALUES (@ToDoItemName)",
                                      new ToDoItem
                                      {
-                                       Name = "Clean Basement",
+                                         ToDoItemName = "Clean Basement",
                                      });
       }
 

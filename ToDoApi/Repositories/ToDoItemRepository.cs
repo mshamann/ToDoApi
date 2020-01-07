@@ -31,7 +31,7 @@ namespace ToDoApi.Repositories
     public async Task<ToDoItem>  GetById(int id)
     {
       using IDbConnection conn = Connection;
-      string Query = "SELECT ID, Name, IsComplete FROM ToDoItem WHERE ID = @ID";
+      string Query = "SELECT ToDoItemId, ToDoItemName, IsComplete FROM ToDoItem WHERE ID = @ID";
       conn.Open();
       var result = await conn.QueryAsync<ToDoItem>(Query, new { ID = id });
       return result.FirstOrDefault();
@@ -40,7 +40,7 @@ namespace ToDoApi.Repositories
     public async Task<List<ToDoItem>> GetItemList()
     {
       using IDbConnection conn = Connection;
-      string Query = "SELECT ID, Name, IsComplete FROM ToDoItem";
+      string Query = "SELECT ToDoItemId, ToDoItemName, IsComplete FROM ToDoItem";
       conn.Open();
       var result = await conn.QueryAsync<ToDoItem>(Query);
       return result.ToList();
